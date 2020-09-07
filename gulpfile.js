@@ -1,6 +1,3 @@
-
-// FROM off doc
-
 var gulp = require("gulp");
 var server = require('gulp-server-livereload');
 var browserify = require("browserify");
@@ -48,17 +45,5 @@ gulp.task('webserver', function() {
         open: true
       }));
 });
-
-// gulp.task('webserver', ['watch'], function () {
-//     gulp.src('dist')
-//       .pipe(server({
-//         fallback: 'index.html',
-//         livereload: {
-//           enable: true,
-//         },
-//         directoryListing: true,
-//         open: true
-//       }));
-//   });
 
 gulp.task("default", gulp.series("watch", "webserver"));
