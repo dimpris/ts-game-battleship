@@ -6,4 +6,8 @@ export class Field {
     public AddCell(cell: Cell) {
         this.cells.push(cell);
     }
+
+    public render () {
+        // 
+    }
 }

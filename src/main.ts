@@ -1,17 +1,14 @@
 import { Cell } from "./core/models/cell.model";
 import { Coordinate } from "./core/models/coordinate.model";
 import { CoordinateX, CoordinateY } from "./core/enums";
-import { sayHello } from "./greet";
 import { Field } from "./core/models/field.model";
 
-function showHello(divName: string, name: string) {
-  const elt = document.getElementById(divName);
-  console.log('name', name);
-  elt.innerText = sayHello(name);
-}
 
-showHello("greeting", "TypeScript");
-
+const canvas = document.querySelector("#battleship-canvas");
+const context = canvas.getContext("2d");
+context.moveTo(0, 0);
+context.lineTo(400, 400);
+context.stroke();
 const field = new Field();
 
 const c1 = new Coordinate(CoordinateX.C, CoordinateY.Nine);
