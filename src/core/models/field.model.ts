@@ -1,17 +1,39 @@
 import { Cell } from "./cell.model";
+import { CoordinateX, CoordinateY } from "../enums";
+import { Coordinate } from "./coordinate.model";
+import {Ship} from "./ship.model";
+import {ShipSection} from "./shipSection.model";
 
 export class Field {
     public cells: Cell[] = [];
     private canvas: HTMLCanvasElement;
-    private context: CanvasRenderingContext2D;
+    public context: CanvasRenderingContext2D;
 
     public constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
         this.context = this.canvas.getContext("2d");
+        this.CreateCells();
     }
 
-    public AddCell(cell: Cell) {
+    private AddCell(cell: Cell) {
         this.cells.push(cell);
+    }
+
+    private CreateCells() {
+        const xsize = Object.keys(CoordinateX).length /2;
+        const ysize = Object.keys(CoordinateX).length /2;
+        for (let i = 0; i < xsize; i++) {
+            for (let j = 0; j < ysize; j++) {
+                this.AddCell(new Cell(new Coordinate(i, j)));
+            }
+        }
+    }
+
+    public PutShip() {
+        const ship = new Ship(this);
+        ship.AddSection(new ShipSection(new Coordinate(1,1)));
+        ship.AddSection(new ShipSection(new Coordinate(1,2)));
+        // console.log(ship);
     }
 
     public render () {
@@ -39,12 +61,21 @@ export class Field {
             }
         }
 
+        const size = Object.keys(CoordinateX).length /2;
         this.context.font = "17px Arial";
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < size; i++) {
             let num = i + 1;
             let y = 35 + (28 * 1.25 * num);
             this.context.fillText(num.toString(), 13, y);
             this.context.fillText(num.toString(), 403, y);
+        }
+        
+        
+        for (let i = 0; i < size; i++) {
+            let num = i + 1;
+            let x = 16 + (28 * 1.25 * num);
+            this.context.fillText(CoordinateX[i], x, 30);
+            this.context.fillText(CoordinateX[i], x+390 , 30);
         }
     }
 }
